@@ -1,0 +1,2 @@
+# WallStreetMC
+ Stock market plugin

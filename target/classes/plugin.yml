@@ -1,0 +1,11 @@
+name: WallStreetMC
+description: WallStreetMC Plugin
+version: '1.0 SNAPSHOT'
+main: com.creatingreal.wallstreetmc.Core
+api-version: 1.20
+commands:
+    testcommand:
+        description: Test Command
+        usage: /testcommand
+        aliases: [testc, tc, tcommand]
+        permission: wallstreetmc.testcommand

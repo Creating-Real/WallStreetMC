@@ -1,0 +1,17 @@
+all-time-trades:
+  1:
+    symbol: PW
+    executed-by: uuid
+    executed-at: Aug 1, 2021 12:00:00 AM
+    price: 100.00
+    shares: 1
+    action: BUY
+    total: 100.00
+  2:
+    symbol: PW
+    executed-by: uuid
+    executed-at: Aug 1, 2021 12:00:00 AM
+    price: 100.00
+    shares: 1
+    action: BUY
+    total: 100.00
