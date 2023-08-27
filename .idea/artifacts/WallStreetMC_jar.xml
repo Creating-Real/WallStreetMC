@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="WallStreetMC:jar">
+    <output-path>$PROJECT_DIR$/../../Games/Local Minecraft Server/plugins</output-path>
+    <root id="archive" name="WallStreetMC.jar">
+      <element id="module-output" name="WallStreetMC" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/github/cryptomorin/XSeries/9.5.0/XSeries-9.5.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

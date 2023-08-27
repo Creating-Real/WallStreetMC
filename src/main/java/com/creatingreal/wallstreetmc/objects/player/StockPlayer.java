@@ -4,8 +4,7 @@ public class StockPlayer {
 
     private String uuid;
     private String dateCreated;
-    private double profitloss;
+    private double profitLoss;
     private double cash;
-
 
 }

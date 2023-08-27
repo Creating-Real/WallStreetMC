@@ -1,0 +1,31 @@
+WallStreetMC
+Have a realistic stock market for your Minecraft Server!
+
+FEATURES:
+- Realistic stock market that reflects in-game transactions
+- Server admins can choose which items in-game are tradable, and set their starting prices
+    - Have a default recommended starting price for each item
+    - Have a default suggestion of what items to make tradable
+- Compatbile with Vault currency - https://www.spigotmc.org/resources/vault.34315/
+    - If no Vault currency is found, it will use the default currency we set
+- Players can buy and sell stocks, affecting prices in real time
+    - Stock market is only open from 9:00 AM to 4:00 PM (converted to Minecraft time, can be configured)
+    - Players can only buy and sell stocks when the market is open
+    - Players can only buy and sell stocks if they have enough money, starting off with an amount you set (default $1000)
+- Custom items from other plugins can be made tradable
+    - If the item is not tradable, it will not be affected by the stock market, and be left out
+
+TODO:
+- Taxes
+- Insurance/Fraud (if you don't have insurance, you can be scammed)
+
+SERVER MODE:
+- Factions or Survival w/ Player Owned Land:
+    - Trade centers
+        - 1 Initial trade center is created at the spawn point, with a configurable radius and transaction fee
+        - Players can create their own trade centers and expand them with the help of the following blocks:
+            - TradePortal: Need 1 to connect to the trade center
+            - Must have a certain net worth to create a trade center (configurable)
+        - Players can set custom transaction fees on categories of items and earn revenue for every transaction
+- Non-Player Owned Land:
+    - GUI for Trading for each player (/trade for command)

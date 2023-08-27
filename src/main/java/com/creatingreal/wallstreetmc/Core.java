@@ -77,7 +77,7 @@ public final class Core extends JavaPlugin {
             // Cast sender to Player object
             Player player = (Player) sender;
 
-            // Check if command is /testcommand (not case sensitive)
+            // Check if command is /testcommand (not case-sensitive)
             if (command.getName().equalsIgnoreCase("testcommand")) {
 
                 // Execute command
