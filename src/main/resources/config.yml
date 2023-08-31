@@ -1,0 +1,32 @@
+market:
+  hours:
+    mode: TIME_TICKS
+    custom-settings:
+      start: 180
+      end: 12000
+    announcements:
+      open:
+        enabled: true
+        ticks-before-open:
+          - 60
+        announcement-message:
+          - "&6&l=== &e&lMarket &6&l===&r"
+          - "&eThe market will open in &a{minutes}m{seconds}s&e!"
+          - "&6&l=== &e&lMarket &6&l===&r"
+        open-message:
+          - "&6&l=== &e&lMarket &6&l===&r"
+          - "&eThe market is now &aopen&e!"
+          - "&eUse &6/trade &eto open the market menu."
+          - "&6&l=== &e&lMarket &6&l===&r"
+      close:
+        enabled: true
+        ticks-before-close:
+          - 60
+        announcement-message:
+          - "&6&l=== &e&lMarket &6&l===&r"
+          - "&eThe market will close in &c{time}&e!"
+          - "&6&l=== &e&lMarket &6&l===&r"
+        close-message:
+          - "&6&l=== &e&lMarket &6&l===&r"
+          - "&eThe market is now &cclosed&e!"
+          - "&6&l=== &e&lMarket &6&l===&r"
