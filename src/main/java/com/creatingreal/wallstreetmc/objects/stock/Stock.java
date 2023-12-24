@@ -8,7 +8,7 @@ public class Stock {
     private List<String> description;
     private String ticker;
     private double price;
-    private int marketCap;
+    private double marketCap;
     private double volatility;
     private int volume;
     private double highOfTheDay;
@@ -22,8 +22,9 @@ public class Stock {
     private boolean halted;
     private String haltReason;
     private int haltDuration;
+    private String configIdentifier;
 
-    public Stock(String name, List<String> description, String ticker, double price, int marketCap, double volatility, int volume, double highOfTheDay, double lowOfTheDay, double openPrice, double closePrice, double previousClose, double allTimeHigh, double allTimeLow, int allTimeVolume, boolean halted, String haltReason, int haltDuration) {
+    public Stock(String name, List<String> description, String ticker, double price, double marketCap, double volatility, int volume, double highOfTheDay, double lowOfTheDay, double openPrice, double closePrice, double previousClose, double allTimeHigh, double allTimeLow, int allTimeVolume, boolean halted, String haltReason, int haltDuration, String configIdentifier) {
         this.name = name;
         this.description = description;
         this.ticker = ticker;
@@ -42,6 +43,15 @@ public class Stock {
         this.halted = halted;
         this.haltReason = haltReason;
         this.haltDuration = haltDuration;
+        this.configIdentifier = configIdentifier;
+    }
+
+    public String getConfigIdentifier() {
+        return configIdentifier;
+    }
+
+    public void setConfigIdentifier(String configIdentifier) {
+        this.configIdentifier = configIdentifier;
     }
 
     public String getName() {
@@ -74,13 +84,29 @@ public class Stock {
 
     public void setPrice(double price) {
         this.price = price;
+
+        if(price > this.highOfTheDay){
+            this.highOfTheDay = price;
+        }
+
+        if(price < this.lowOfTheDay){
+            this.lowOfTheDay = price;
+        }
+
+        if(price > this.allTimeHigh){
+            this.allTimeHigh = price;
+        }
+
+        if(price < this.allTimeLow){
+            this.allTimeLow = price;
+        }
     }
 
-    public int getMarketCap() {
+    public double getMarketCap() {
         return marketCap;
     }
 
-    public void setMarketCap(int marketCap) {
+    public void setMarketCap(double marketCap) {
         this.marketCap = marketCap;
     }
 
@@ -98,6 +124,10 @@ public class Stock {
 
     public void setVolume(int volume) {
         this.volume = volume;
+
+        if(volume > this.allTimeVolume){
+            this.allTimeVolume = volume;
+        }
     }
 
     public double getHighOfTheDay() {

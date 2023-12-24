@@ -1,6 +1,8 @@
 package com.creatingreal.wallstreetmc.tasks;
 
 import com.creatingreal.wallstreetmc.Core;
+import com.creatingreal.wallstreetmc.objects.stock.Stock;
+import com.creatingreal.wallstreetmc.objects.stock.StockManager;
 import com.creatingreal.wallstreetmc.util.Settings;
 import com.creatingreal.wallstreetmc.util.UtilTime;
 import org.bukkit.Bukkit;
@@ -36,7 +38,6 @@ public class HoursTimer extends BukkitRunnable {
 //                    Bukkit.broadcastMessage("Normal Difference: " + Math.abs(marketOpenTicks - currentTimeTicks));
                     for (String msg : Settings.ANNOUNCEMENT_OPEN_ANNOUNCEMENTMESSAGE) {
                         Bukkit.broadcastMessage("" + msg.replace("&", "§").replace("{time}", UtilTime.getMinutesSecondsFromLong(difference)));
-
                     }
                 }
 
@@ -46,8 +47,19 @@ public class HoursTimer extends BukkitRunnable {
                 for(String msg : Settings.ANNOUNCEMENT_OPEN_MARKETOPEN){
                     Bukkit.broadcastMessage(msg.replace("&", "§"));
                 }
+
+                for(Stock stock : StockManager.getStocks()){
+                    stock.setPreviousClose(stock.getPrice());
+                    stock.setOpenPrice(stock.getPrice());
+                    Core.getInstance().getStockManager().saveStock(stock);
+                }
             }
             else if(Settings.ANNOUNCEMENT_OPEN_TICKSBEFOREOPEN.get(i) - marketOpenTicks == 0 && currentTimeTicks == 0 && !Core.getInstance().isMarketOpen){
+                for(Stock stock : StockManager.getStocks()){
+                    stock.setPreviousClose(stock.getPrice());
+                    stock.setOpenPrice(stock.getPrice());
+                    Core.getInstance().getStockManager().saveStock(stock);
+                }
                 for (String msg : Settings.ANNOUNCEMENT_OPEN_ANNOUNCEMENTMESSAGE) {
                     Bukkit.broadcastMessage("" + msg.replace("&", "§").replace("{time}", UtilTime.getMinutesSecondsFromLong(Settings.ANNOUNCEMENT_OPEN_TICKSBEFOREOPEN.get(i))));
                 }
@@ -82,6 +94,12 @@ public class HoursTimer extends BukkitRunnable {
                 for (String msg : Settings.ANNOUNCEMENT_CLOSE_MARKETCLOSE) {
                     Bukkit.broadcastMessage(msg.replace("&", "§"));
                 }
+
+                for(Stock stock : StockManager.getStocks()){
+                    stock.setClosePrice(stock.getPrice());
+                    Core.getInstance().getStockManager().saveStock(stock);
+                }
+
             } else if (Settings.ANNOUNCEMENT_CLOSE_TICKSBEFORECLOSE.get(i) - marketCloseTicks == 0 && currentTimeTicks == 0 && Core.getInstance().isMarketOpen) {
                 for (String msg : Settings.ANNOUNCEMENT_CLOSE_ANNOUNCEMENTMESSAGE) {
                     Bukkit.broadcastMessage("" + msg.replace("&", "§").replace("{time}", UtilTime.getMinutesSecondsFromLong(Settings.ANNOUNCEMENT_CLOSE_TICKSBEFORECLOSE.get(i))));

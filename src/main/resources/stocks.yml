@@ -1,20 +1,21 @@
 stocks:
   pink_wool:
     name: Pink Wool
-    description: Pink Wool from sheep
+    description: []
     ticker: PW
-    price: 100.00
-    market-cap: 1000000
+    price: 178.19
+    marketCap: 1022247.95
     volatility: 0.1
-    volume: 0
-    high-of-day: 0
-    low-of-day: 0
-    open-price: 0
-    close-price: 0
-    previous-close: 0
-    all-time-high: 0
-    all-time-low: 0
-    all-time-volume: 0
+    volume: 250
+    highOfTheDay: 178.19
+    lowOfTheDay: 0.0
+    openPrice: 0.0
+    closePrice: 0.0
+    previousClose: 0.0
+    allTimeHigh: 178.19
+    allTimeLow: 0.0
+    allTimeVolume: 250
     halted: false
-    halt-reason: null
-    halt-duration: null
+    haltReason: ''
+    haltDuration: 60
+    configIdentifier: pink_wool

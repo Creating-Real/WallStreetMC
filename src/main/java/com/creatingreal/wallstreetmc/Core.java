@@ -8,6 +8,7 @@ package com.creatingreal.wallstreetmc;
 // Imports
 import com.creatingreal.wallstreetmc.objects.player.PlayerManager;
 import com.creatingreal.wallstreetmc.objects.player.StockPlayer;
+import com.creatingreal.wallstreetmc.objects.stock.Stock;
 import com.creatingreal.wallstreetmc.objects.stock.StockManager;
 import com.creatingreal.wallstreetmc.objects.trade.TradeManager;
 import com.creatingreal.wallstreetmc.objects.trade.TradeType;
@@ -28,6 +29,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.slf4j.helpers.Util;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 // Core Class
 public final class Core extends JavaPlugin {
@@ -140,7 +143,30 @@ public final class Core extends JavaPlugin {
             // Check if command is /testcommand (not case-sensitive)
             if (command.getName().equalsIgnoreCase("testcommand")) {
 
-                tradeManager.executeTrade(player, "AAPL", 10, 100, TradeType.BUY.name());
+                if(args.length == 0){
+                    player.sendMessage("§c§l[!] §cUsage: /testcommand <stock> <amount> <buy/sell>");
+                    return true;
+                }
+
+                String stock = args[0];
+                int amount = Integer.parseInt(args[1]);
+                String type = args[2];
+
+                BigDecimal total = new BigDecimal(StockManager.getStockByTicker(stock).getPrice()).multiply(new BigDecimal(amount));
+                // round total to 2 decimal places
+                total = total.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+                if(type.equalsIgnoreCase("buy")){
+                    player.sendMessage("§6§l[!] §6Buying " + amount + " shares of " + stock + " for $" + StockManager.getStockByTicker(stock).getPrice() + " each.");
+                    player.sendMessage("§6§l[!] §6Total: $" + total);
+                    tradeManager.executeTrade(player, stock, amount, StockManager.getStockByTicker(stock).getPrice(), TradeType.BUY.name());
+                    player.sendMessage("§6§l[!] §6Bought " + amount + " shares of " + stock + " for $" + StockManager.getStockByTicker(stock).getPrice() + " each.");
+                }else if(type.equalsIgnoreCase("sell")){
+                    player.sendMessage("§6§l[!] §6Selling " + amount + " shares of " + stock + " for $" + StockManager.getStockByTicker(stock).getPrice() + " each.");
+                    player.sendMessage("§6§l[!] §6Total: $" + total);
+                    tradeManager.executeTrade(player, stock, amount, StockManager.getStockByTicker(stock).getPrice(), TradeType.SELL.name());
+                    player.sendMessage("§6§l[!] §6Sold " + amount + " shares of " + stock + " for $" + StockManager.getStockByTicker(stock).getPrice() + " each.");
+                }
 
                 return true;
 

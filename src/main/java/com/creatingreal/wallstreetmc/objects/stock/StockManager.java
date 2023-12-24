@@ -45,13 +45,39 @@ public class StockManager {
             boolean halted = c.getBoolean("stocks." + key + ".halted");
             String haltReason = c.getString("stocks." + key + ".haltReason");
             int haltDuration = c.getInt("stocks." + key + ".haltDuration");
+            String configIdentifier = c.getString("stocks." + key + ".configIdentifier");
 
-            Stock stock = new Stock(name, description, ticker, price, marketCap, volatility, volume, highOfTheDay, lowOfTheDay, openPrice, closePrice, previousClose, allTimeHigh, allTimeLow, allTimeVolume, halted, haltReason, haltDuration);
+            Stock stock = new Stock(name, description, ticker, price, marketCap, volatility, volume, highOfTheDay, lowOfTheDay, openPrice, closePrice, previousClose, allTimeHigh, allTimeLow, allTimeVolume, halted, haltReason, haltDuration, configIdentifier);
             stocks.add(stock);
         }
 
         Bukkit.getLogger().info("Loaded " + stocks.size() + " stocks!");
 
+    }
+
+    public void saveStock(Stock stock){
+        YamlConfiguration c = Core.getConfig("stocks.yml");
+
+        c.set("stocks." + stock.getConfigIdentifier() + ".name", stock.getName());
+        c.set("stocks." + stock.getConfigIdentifier() + ".description", stock.getDescription());
+        c.set("stocks." + stock.getConfigIdentifier() + ".ticker", stock.getTicker());
+        c.set("stocks." + stock.getConfigIdentifier() + ".price", stock.getPrice());
+        c.set("stocks." + stock.getConfigIdentifier() + ".marketCap", stock.getMarketCap());
+        c.set("stocks." + stock.getConfigIdentifier() + ".volatility", stock.getVolatility());
+        c.set("stocks." + stock.getConfigIdentifier() + ".volume", stock.getVolume());
+        c.set("stocks." + stock.getConfigIdentifier() + ".highOfTheDay", stock.getHighOfTheDay());
+        c.set("stocks." + stock.getConfigIdentifier() + ".lowOfTheDay", stock.getLowOfTheDay());
+        c.set("stocks." + stock.getConfigIdentifier() + ".openPrice", stock.getOpenPrice());
+        c.set("stocks." + stock.getConfigIdentifier() + ".closePrice", stock.getClosePrice());
+        c.set("stocks." + stock.getConfigIdentifier() + ".previousClose", stock.getPreviousClose());
+        c.set("stocks." + stock.getConfigIdentifier() + ".allTimeHigh", stock.getAllTimeHigh());
+        c.set("stocks." + stock.getConfigIdentifier() + ".allTimeLow", stock.getAllTimeLow());
+        c.set("stocks." + stock.getConfigIdentifier() + ".allTimeVolume", stock.getAllTimeVolume());
+        c.set("stocks." + stock.getConfigIdentifier() + ".halted", stock.isHalted());
+        c.set("stocks." + stock.getConfigIdentifier() + ".haltReason", stock.getHaltReason());
+        c.set("stocks." + stock.getConfigIdentifier() + ".haltDuration", stock.getHaltDuration());
+
+        Core.getInstance().getFileManager().getConfig("stocks.yml").save();
     }
 
     public static Stock getStock(String name){
